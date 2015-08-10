@@ -6,7 +6,7 @@ package Test::Mojo::Role::TestDeep;
     use Test::Deep;
     use Test::Mojo::WithRoles 'TestDeep';
 
-    my $t = Test::Mojo->new( 'MyApp' );
+    my $t = Test::Mojo::WithRoles->new( 'MyApp' );
     $t->get_ok( '/data.json' )
         ->json_deeply(
             superhashof( { foo => 'bar' } ),
