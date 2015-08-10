@@ -1,0 +1,9 @@
+Changelog for Test-Mojo-Role-TestDeep
+
+0.001 2015-08-10T00:22:21
+ - add documentation and tests
+ - set the success flag correctly
+ - add support for json pointers
+ - add initial implementation from Dynamocles
+ - Minting dist
+

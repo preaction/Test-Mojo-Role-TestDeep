@@ -1,0 +1,62 @@
+# NAME
+
+Test::Mojo::Role::TestDeep - Add Test::Deep methods to Test::Mojo::WithRoles
+
+# VERSION
+
+version 0.001
+
+# STATUS
+
+<a href="https://travis-ci.org/preaction/Test-Mojo-Role-TestDeep"><img src="https://travis-ci.org/preaction/Test-Mojo-Role-TestDeep.svg?branch=master"></a><a href="https://coveralls.io/r/preaction/Test-Mojo-Role-TestDeep"><img src="https://coveralls.io/repos/preaction/Test-Mojo-Role-TestDeep/badge.png" alt="Coverage Status" /></a>
+
+# SYNOPSIS
+
+    use Test::Deep;
+    use Test::Mojo::WithRoles 'TestDeep';
+
+    my $t = Test::Mojo->new( 'MyApp' );
+    $t->get_ok( '/data.json' )
+        ->json_deeply(
+            superhashof( { foo => 'bar' } ),
+            'has at least a foo key with "bar" value',
+        );
+
+# DESCRIPTION
+
+This module adds some [Test::Deep](https://metacpan.org/pod/Test::Deep) functionality to [Test::Mojo](https://metacpan.org/pod/Test::Mojo). `Test::Deep`
+allows for extremely-customizable testing of data structures.
+
+# METHODS
+
+## json\_deeply
+
+    $t->cmp_deeply( $expect, $desc )
+    $t->cmp_deeply( $ptr, $expect, $desc )
+
+Test that the current response (parsed as a JSON object) matches the
+given tests. `$expect` is a data structure containing Test::Deep tests
+to run. `$desc` is a description of the test.
+
+If given, `$ptr` is a JSON pointer string to pick out a single part of the
+data structure. This is more convenient than using Test::Deep's test routines
+to do the same thing. See [Mojo::JSON::Pointer](https://metacpan.org/pod/Mojo::JSON::Pointer).
+
+Corresponds to ["cmp\_deeply" in Test::Deep](https://metacpan.org/pod/Test::Deep#cmp_deeply).
+
+# SEE ALSO
+
+- [Test::Deep](https://metacpan.org/pod/Test::Deep)
+- [Test::Mojo](https://metacpan.org/pod/Test::Mojo)
+- [Test::Mojo::WithRoles](https://metacpan.org/pod/Test::Mojo::WithRoles)
+
+# AUTHOR
+
+Doug Bell <preaction@cpan.org>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2015 by Doug Bell.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
