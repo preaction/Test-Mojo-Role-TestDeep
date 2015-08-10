@@ -1,6 +1,8 @@
 Changelog for Test-Mojo-Role-TestDeep
 
-0.001 2015-08-10T00:22:21
+0.001 2015-08-10T00:25:30
+ - add build artifacts
+ - remove ModuleBuild
  - add documentation and tests
  - set the success flag correctly
  - add support for json pointers
