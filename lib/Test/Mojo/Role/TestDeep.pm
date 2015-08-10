@@ -43,7 +43,7 @@ sub json_deeply {
     my $given = $t->tx->res->json( $ptr );
 
     local $Test::Builder::Level = $Test::Builder::Level + 1;
-    return cmp_deeply( $given, $expect, $desc );
+    return $t->success( cmp_deeply( $given, $expect, $desc ) );
 }
 
 1;
