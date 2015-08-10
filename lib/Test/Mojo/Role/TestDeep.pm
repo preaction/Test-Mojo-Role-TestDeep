@@ -32,8 +32,8 @@ use Test::Deep qw( cmp_deeply );
 
 Test that the current response (parsed as a JSON object) matches the given
 tests. C<$expect> is a data structure containing L<Test::Deep
-comparisons|SPECIAL COMPARISONS PROVIDED> to run. C<$desc> is a description of
-the test.
+comparisons|Test::Deep/SPECIAL COMPARISONS PROVIDED> to run. C<$desc> is a
+description of the test.
 
 If given, C<$ptr> is a JSON pointer string to pick out a single part of the
 data structure. This is more convenient than using Test::Deep's comparison
