@@ -26,9 +26,24 @@ use Role::Tiny;
 use Test::Deep qw( cmp_deeply );
 
 sub json_deeply {
-    my ( $t, $test, $desc ) = @_;
+    my ( $t, $ptr, $expect, $desc ) = @_;
+
+    # Pointer is an optional argument
+    if ( @_ < 4 && !ref $expect ) {
+        $desc = $expect;
+        $expect = $ptr;
+        $ptr = '';
+    }
+
+    die "expected value should be a data structure or Test::Deep test object, not a simple scalar (did you mean to use json_is()?)"
+        if !ref $expect;
+
+    $desc ||= qq{deeply match JSON Pointer "$ptr"};
+
+    my $given = $t->tx->res->json( $ptr );
+
     local $Test::Builder::Level = $Test::Builder::Level + 1;
-    return cmp_deeply( $t->tx->res->json, $test, $desc );
+    return cmp_deeply( $given, $expect, $desc );
 }
 
 1;
