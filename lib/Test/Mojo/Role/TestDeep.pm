@@ -30,15 +30,16 @@ use Test::Deep qw( cmp_deeply );
     $t->cmp_deeply( $expect, $desc )
     $t->cmp_deeply( $ptr, $expect, $desc )
 
-Test that the current response (parsed as a JSON object) matches the
-given tests. C<$expect> is a data structure containing Test::Deep tests
-to run. C<$desc> is a description of the test.
+Test that the current response (parsed as a JSON object) matches the given
+tests. C<$expect> is a data structure containing L<Test::Deep
+comparisons|SPECIAL COMPARISONS PROVIDED> to run. C<$desc> is a description of
+the test.
 
 If given, C<$ptr> is a JSON pointer string to pick out a single part of the
-data structure. This is more convenient than using Test::Deep's test routines
-to do the same thing. See L<Mojo::JSON::Pointer>.
+data structure. This is more convenient than using Test::Deep's comparison
+routines to do the same thing. See L<Mojo::JSON::Pointer>.
 
-Corresponds to L<Test::Deep/cmp_deeply>.
+Corresponds to L<cmp_deeply in Test::Deep|Test::Deep/COMPARISON FUNCTIONS>.
 
 =cut
 
