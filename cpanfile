@@ -2,7 +2,7 @@ requires "Mojolicious" => "6.0";
 requires "Role::Tiny" => "0";
 requires "Test::Deep" => "0";
 requires "Test::Mojo::WithRoles" => "0";
-requires "perl" => "5.008";
+requires "perl" => "5.010";
 requires "strict" => "0";
 requires "warnings" => "0";
 

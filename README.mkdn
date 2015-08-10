@@ -4,7 +4,7 @@ Test::Mojo::Role::TestDeep - Add Test::Deep methods to Test::Mojo::WithRoles
 
 # VERSION
 
-version 0.001
+version 0.002
 
 # STATUS
 
@@ -34,15 +34,16 @@ allows for extremely-customizable testing of data structures.
     $t->cmp_deeply( $expect, $desc )
     $t->cmp_deeply( $ptr, $expect, $desc )
 
-Test that the current response (parsed as a JSON object) matches the
-given tests. `$expect` is a data structure containing Test::Deep tests
-to run. `$desc` is a description of the test.
+Test that the current response (parsed as a JSON object) matches the given
+tests. `$expect` is a data structure containing [Test::Deep
+comparisons](https://metacpan.org/pod/SPECIAL&#x20;COMPARISONS&#x20;PROVIDED) to run. `$desc` is a description of
+the test.
 
 If given, `$ptr` is a JSON pointer string to pick out a single part of the
-data structure. This is more convenient than using Test::Deep's test routines
-to do the same thing. See [Mojo::JSON::Pointer](https://metacpan.org/pod/Mojo::JSON::Pointer).
+data structure. This is more convenient than using Test::Deep's comparison
+routines to do the same thing. See [Mojo::JSON::Pointer](https://metacpan.org/pod/Mojo::JSON::Pointer).
 
-Corresponds to ["cmp\_deeply" in Test::Deep](https://metacpan.org/pod/Test::Deep#cmp_deeply).
+Corresponds to [cmp\_deeply in Test::Deep](https://metacpan.org/pod/Test::Deep#COMPARISON-FUNCTIONS).
 
 # SEE ALSO
 

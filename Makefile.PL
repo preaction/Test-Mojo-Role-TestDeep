@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use 5.008;
+use 5.010;
 
 use ExtUtils::MakeMaker;
 
@@ -15,7 +15,7 @@ my %WriteMakefileArgs = (
   "DISTNAME" => "Test-Mojo-Role-TestDeep",
   "EXE_FILES" => [],
   "LICENSE" => "perl",
-  "MIN_PERL_VERSION" => "5.008",
+  "MIN_PERL_VERSION" => "5.010",
   "NAME" => "Test::Mojo::Role::TestDeep",
   "PREREQ_PM" => {
     "Mojolicious" => "6.0",
@@ -33,7 +33,7 @@ my %WriteMakefileArgs = (
     "Test::Exception" => 0,
     "Test::More" => "1.001005"
   },
-  "VERSION" => "0.001",
+  "VERSION" => "0.002",
   "test" => {
     "TESTS" => "t/*.t"
   }

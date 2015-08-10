@@ -1,6 +1,11 @@
 Changelog for Test-Mojo-Role-TestDeep
 
-0.001 2015-08-10T00:25:30
+0.002 2015-08-10T00:55:30
+ - fix docs to better work with Test::Deep's docs
+ - bump version requirement to perl 5.10
+
+0.001 2015-08-10T00:25:35
+ - release v0.001
  - add build artifacts
  - remove ModuleBuild
  - add documentation and tests
