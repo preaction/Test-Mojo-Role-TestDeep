@@ -4,7 +4,7 @@ Test::Mojo::Role::TestDeep - Add Test::Deep methods to Test::Mojo::WithRoles
 
 # VERSION
 
-version 0.003
+version 0.004
 
 # STATUS
 
@@ -15,7 +15,7 @@ version 0.003
     use Test::Deep;
     use Test::Mojo::WithRoles 'TestDeep';
 
-    my $t = Test::Mojo->new( 'MyApp' );
+    my $t = Test::Mojo::WithRoles->new( 'MyApp' );
     $t->get_ok( '/data.json' )
         ->json_deeply(
             superhashof( { foo => 'bar' } ),

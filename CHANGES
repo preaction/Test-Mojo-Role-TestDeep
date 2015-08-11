@@ -1,6 +1,9 @@
 Changelog for Test-Mojo-Role-TestDeep
 
-0.003 2015-08-10T01:00:09
+0.004 2015-08-11T01:05:18
+ - fix synopsis example
+
+0.003 2015-08-10T01:00:09Z
  - fix link to Test::Deep comparisons
 
 0.002 2015-08-10T00:55:30Z
