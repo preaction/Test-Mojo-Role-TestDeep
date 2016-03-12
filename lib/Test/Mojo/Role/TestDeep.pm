@@ -64,6 +64,108 @@ sub json_deeply {
     return $t->success( cmp_deeply( $given, $expect, $desc ) );
 }
 
+=head2 text_deeply
+
+    $t->text_deeply( $selector => $test, 'description' );
+
+Test the text of the elements matched by the given selector against the
+given test. The elements will always be an arrayref, even if only one
+element matches.
+
+    # test.html
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/projects">Projects</a></li>
+        </ul>
+    </nav>
+
+    # test.t
+    $t->get_ok( 'test.html' )
+      ->text_deeply(
+        'nav a' => [bag( Home Blog Projects )],
+        'nav element text is correct',
+      );
+
+This is equivalent to:
+
+    $t->get_ok( 'test.html' );
+    my $dom = $t->tx->res->dom;
+    cmp_deeply
+        [ $dom->find( 'nav a' )->map( 'text' )->each ],
+        [ bag( Home Blog Projects ) ],
+        'nav element text is correct';
+
+=cut
+
+sub text_deeply {
+    my ( $t, $sel, $expect, $desc ) = @_;
+    $desc ||= qq{deeply match text for "$sel"};
+    my @given = $t->tx->res->dom->find( $sel )->map( 'text' )->each;
+    local $Test::Builder::Level = $Test::Builder::Level + 1;
+    return $t->success( cmp_deeply( \@given, $expect, $desc ) );
+}
+
+
+=head2 attr_deeply
+
+    $t->attr_deeply( $selector, $attr => $test, ..., 'description' );
+
+Test the given attributes of the elements matched by the given selector
+against the given test. The element attributes will always be an
+arrayref, even if only one element matches.
+
+    # test.html
+    <form action="/search" method="GET">
+        ...
+    </form>
+
+    # test.t
+    $t->get_ok( 'test.html' )
+      ->attr_deeply(
+        'form',
+        action => [qw( /search )],
+        method => [re( qr( get )i )],
+        'form element is correct',
+      );
+
+This is equivalent to:
+
+    $t->get_ok( 'test.html' );
+    my $dom = $t->tx->res->dom;
+    cmp_deeply
+        [ $dom->find( 'form' )->map( attr => 'action' )->each ],
+        [ qw( /search ) ],
+        'form element action is correct',
+        ;
+    cmp_deeply
+        [ $dom->find( 'form' )->map( attr => 'method' )->each ],
+        [ re( qr( get )i ) ],
+        'form element method is correct',
+        ;
+
+=cut
+
+sub attr_deeply {
+    my ( $t, $sel, @args ) = @_;
+    my $desc = qq{deeply match attributes for "$sel"};
+    if ( @args % 2 == 1 ) {
+        $desc = pop @args;
+    }
+    my %expect = @args;
+
+    my %given;
+    for my $elem ( $t->tx->res->dom->find( $sel )->each ) {
+        for my $attr ( keys %expect ) {
+            push @{ $given{ $attr } }, $elem->attr( $attr );
+        }
+    }
+
+    local $Test::Builder::Level = $Test::Builder::Level + 1;
+    return $t->success( cmp_deeply( \%given, \%expect, $desc ) );
+}
+
 1;
 
 __END__
