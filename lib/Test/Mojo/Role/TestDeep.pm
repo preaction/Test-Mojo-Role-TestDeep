@@ -30,8 +30,11 @@ package Test::Mojo::Role::TestDeep;
 
 =head1 DESCRIPTION
 
-This module adds some L<Test::Deep> functionality to L<Test::Mojo>. C<Test::Deep>
-allows for extremely-customizable testing of data structures.
+This module adds some L<Test::Deep> functionality to L<Test::Mojo>.
+C<Test::Deep> allows for extremely-customizable testing of data
+structures. This module adds some helper methods to C<Test::Mojo> (using
+L<Test::Mojo::WithRoles>) to test your web app's responses using
+C<Test::Deep>.
 
 =cut
 
