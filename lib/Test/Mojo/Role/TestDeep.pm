@@ -45,8 +45,8 @@ use Test::Deep qw( cmp_deeply );
 
 =method json_deeply
 
-    $t->cmp_deeply( $expect, $desc )
-    $t->cmp_deeply( $ptr, $expect, $desc )
+    $t->json_deeply( $expect, $desc )
+    $t->json_deeply( $ptr, $expect, $desc )
 
 Test that the current response (parsed as a JSON object) matches the given
 tests. C<$expect> is a data structure containing L<Test::Deep
