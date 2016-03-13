@@ -50,8 +50,8 @@ use Test::Deep qw( cmp_deeply );
 
 Test that the current response (parsed as a JSON object) matches the given
 tests. C<$expect> is a data structure containing L<Test::Deep
-comparisons|Test::Deep/SPECIAL COMPARISONS PROVIDED> to run. C<$desc> is a
-description of the test.
+comparisons|Test::Deep/SPECIAL COMPARISONS PROVIDED> to run. C<$desc> is an
+optional description of the test.
 
 If given, C<$ptr> is a JSON pointer string to pick out a single part of the
 data structure. This is more convenient than using Test::Deep's comparison
@@ -89,7 +89,7 @@ sub json_deeply {
 Test the text of the elements matched by the given C<$selector> against
 the given test. C<$expect> is a data structure containing L<Test::Deep
 comparisons|Test::Deep/SPECIAL COMPARISONS PROVIDED> to run. C<$desc> is
-a description of the test.
+an optional description of the test.
 
 The elements will always be an arrayref, even if only one
 element matches.
@@ -139,7 +139,7 @@ sub text_deeply {
 Test the given attributes of the elements matched by the given selector
 against the given test. C<$expect> is a data structure containing
 L<Test::Deep comparisons|Test::Deep/SPECIAL COMPARISONS PROVIDED> to
-run. C<$desc> is a description of the test.
+run. C<$desc> is an optional description of the test.
 
 The element attributes will always be an arrayref, even if only one
 element matches.
