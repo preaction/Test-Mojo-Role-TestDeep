@@ -108,7 +108,7 @@ For example:
     # test.t
     $t->get_ok( 'test.html' )
       ->text_deeply(
-        'nav a' => [bag( Home Blog Projects )],
+        'nav a' => bag( qw( Home Blog Projects ) ),
         'nav element text is correct',
       );
 
@@ -118,7 +118,7 @@ This is equivalent to:
     my $dom = $t->tx->res->dom;
     cmp_deeply
         [ $dom->find( 'nav a' )->map( 'text' )->each ],
-        [ bag( Home Blog Projects ) ],
+        bag( qw( Home Blog Projects ) ),
         'nav element text is correct';
 
 =cut
