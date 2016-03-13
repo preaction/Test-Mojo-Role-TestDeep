@@ -84,11 +84,17 @@ sub json_deeply {
 
 =head2 text_deeply
 
-    $t->text_deeply( $selector => $test, 'description' );
+    $t->text_deeply( $selector => $expect, $desc );
 
-Test the text of the elements matched by the given selector against the
-given test. The elements will always be an arrayref, even if only one
+Test the text of the elements matched by the given C<$selector> against
+the given test. C<$expect> is a data structure containing L<Test::Deep
+comparisons|Test::Deep/SPECIAL COMPARISONS PROVIDED> to run. C<$desc> is
+a description of the test.
+
+The elements will always be an arrayref, even if only one
 element matches.
+
+For example:
 
     # test.html
     <nav>
@@ -128,11 +134,17 @@ sub text_deeply {
 
 =head2 attr_deeply
 
-    $t->attr_deeply( $selector, $attr => $test, ..., 'description' );
+    $t->attr_deeply( $selector, $attr => $expect, ..., $desc );
 
 Test the given attributes of the elements matched by the given selector
-against the given test. The element attributes will always be an
-arrayref, even if only one element matches.
+against the given test. C<$expect> is a data structure containing
+L<Test::Deep comparisons|Test::Deep/SPECIAL COMPARISONS PROVIDED> to
+run. C<$desc> is a description of the test.
+
+The element attributes will always be an arrayref, even if only one
+element matches.
+
+For example:
 
     # test.html
     <form action="/search" method="GET">
