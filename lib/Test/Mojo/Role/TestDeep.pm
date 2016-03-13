@@ -3,17 +3,17 @@ package Test::Mojo::Role::TestDeep;
 
 =head1 SYNOPSIS
 
-    use Test::Deep;
     use Test::Mojo::WithRoles 'TestDeep';
+    use Test::Deep; # Get Test::Deep comparison functions
 
     my $t = Test::Mojo::WithRoles->new( 'MyApp' );
 
     # Test JSON responses with Test::Deep
     $t->get_ok( '/data.json' )
-        ->json_deeply(
-            superhashof( { foo => 'bar' } ),
-            'has at least a foo key with "bar" value',
-        );
+      ->json_deeply(
+        superhashof( { foo => 'bar' } ),
+        'has at least a foo key with "bar" value',
+      );
 
     # Test HTML with Test::Deep
     $t->get_ok( '/index.html' )
