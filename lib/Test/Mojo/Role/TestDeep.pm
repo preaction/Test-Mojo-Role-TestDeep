@@ -7,11 +7,26 @@ package Test::Mojo::Role::TestDeep;
     use Test::Mojo::WithRoles 'TestDeep';
 
     my $t = Test::Mojo::WithRoles->new( 'MyApp' );
+
+    # Test JSON responses with Test::Deep
     $t->get_ok( '/data.json' )
         ->json_deeply(
             superhashof( { foo => 'bar' } ),
             'has at least a foo key with "bar" value',
         );
+
+    # Test HTML with Test::Deep
+    $t->get_ok( '/index.html' )
+      ->text_deeply(
+        'nav a',
+        [qw( Home Blog Projects About Contact )],
+        'nav link text matches site section titles',
+      )
+      ->attr_deeply(
+        'nav a',
+        href => [qw( / /blog /projects /about /contact )],
+        'nav link href matches site section URLs',
+      );
 
 =head1 DESCRIPTION
 
