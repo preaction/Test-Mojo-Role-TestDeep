@@ -1,6 +1,9 @@
 Changelog for Test-Mojo-Role-TestDeep
 
-0.005 2016-03-13T19:44:23
+0.006 2016-03-13T20:27:34
+ - fix doc examples missing quotes
+
+0.005 2016-03-13T19:44:23Z
  - mention that test descriptions are optional
  - expand new method docs to match json_deeply
  - fix method usage having the wrong method name
