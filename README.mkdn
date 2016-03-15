@@ -4,7 +4,7 @@ Test::Mojo::Role::TestDeep - Add Test::Deep methods to Test::Mojo::WithRoles
 
 # VERSION
 
-version 0.006
+version 0.007
 
 # STATUS
 
@@ -99,6 +99,45 @@ This is equivalent to:
     my $dom = $t->tx->res->dom;
     cmp_deeply
         [ $dom->find( 'nav a' )->map( 'text' )->each ],
+        bag( qw( Home Blog Projects ) ),
+        'nav element text is correct';
+
+## all\_text\_deeply
+
+    $t->all_text_deeply( $selector => $expect, $desc );
+
+Test the complete text of the elements and all child elements matched by
+the given `$selector` against the given test. `$expect` is a data
+structure containing [Test::Deep comparisons](https://metacpan.org/pod/Test::Deep#SPECIAL-COMPARISONS-PROVIDED) to run. `$desc` is an optional description of the
+test.
+
+The elements will always be an arrayref, even if only one
+element matches.
+
+For example:
+
+    # test.html
+    <nav>
+        <ul>
+            <li><a href="/"><em>Home</em></a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/projects"><strong>Projects</strong></a></li>
+        </ul>
+    </nav>
+
+    # test.t
+    $t->get_ok( 'test.html' )
+      ->all_text_deeply(
+        'nav a' => bag( qw( Home Blog Projects ) ),
+        'nav element text is correct',
+      );
+
+This is equivalent to:
+
+    $t->get_ok( 'test.html' );
+    my $dom = $t->tx->res->dom;
+    cmp_deeply
+        [ $dom->find( 'nav a' )->map( 'all_text' )->each ],
         bag( qw( Home Blog Projects ) ),
         'nav element text is correct';
 

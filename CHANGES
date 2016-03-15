@@ -1,6 +1,10 @@
 Changelog for Test-Mojo-Role-TestDeep
 
-0.006 2016-03-13T20:27:34
+0.007 2016-03-15T06:27:50
+ - add all_text_deeply method
+ - add diagnostic information when tests fail
+
+0.006 2016-03-13T20:27:34Z
  - fix doc examples missing quotes
 
 0.005 2016-03-13T19:44:23Z
