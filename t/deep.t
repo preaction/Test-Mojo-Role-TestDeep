@@ -15,9 +15,9 @@ use Test::Exception;
           ->to( cb => sub {
             $_[0]->render(
                 text => join( '',
-                    '<div id="foo" class="item">foo</div>',
-                    '<div id="bar" class="item">bar</div>',
-                    '<div id="baz" class="item">baz</div>',
+                    '<div id="foo" class="item">foo<span>!</span></div>',
+                    '<div id="bar" class="item">bar<span>!</span></div>',
+                    '<div id="baz" class="item">baz<span>!</span></div>',
                 ),
             );
           } );
@@ -101,6 +101,22 @@ subtest 'text_deeply' => sub {
         my $retval = $t->get_ok( '/data.html' )
           ->text_deeply( 'div', [qw( foo bar baz )] );
         is refaddr $retval, refaddr $t;
+        ok $t->success, 'last test was successful';
+    };
+};
+
+subtest 'all_text_deeply' => sub {
+    subtest 'with description' => sub {
+        my $retval = $t->get_ok( '/data.html' )
+          ->all_text_deeply( 'div', [qw( foo! bar! baz! )], 'items are correct' );
+        is refaddr $retval, refaddr $t, 'return value is test object';
+        ok $t->success, 'last test was successful';
+    };
+
+    subtest 'without description' => sub {
+        my $retval = $t->get_ok( '/data.html' )
+          ->all_text_deeply( 'div', [qw( foo! bar! baz! )] );
+        is refaddr $retval, refaddr $t, 'return value is test object';
         ok $t->success, 'last test was successful';
     };
 };

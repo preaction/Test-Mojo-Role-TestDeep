@@ -136,6 +136,58 @@ sub text_deeply {
     return $t->success( $result );
 }
 
+=head2 all_text_deeply
+
+    $t->all_text_deeply( $selector => $expect, $desc );
+
+Test the complete text of the elements and all child elements matched by
+the given C<$selector> against the given test. C<$expect> is a data
+structure containing L<Test::Deep comparisons|Test::Deep/SPECIAL
+COMPARISONS PROVIDED> to run. C<$desc> is an optional description of the
+test.
+
+The elements will always be an arrayref, even if only one
+element matches.
+
+For example:
+
+    # test.html
+    <nav>
+        <ul>
+            <li><a href="/"><em>Home</em></a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/projects"><strong>Projects</strong></a></li>
+        </ul>
+    </nav>
+
+    # test.t
+    $t->get_ok( 'test.html' )
+      ->all_text_deeply(
+        'nav a' => bag( qw( Home Blog Projects ) ),
+        'nav element text is correct',
+      );
+
+This is equivalent to:
+
+    $t->get_ok( 'test.html' );
+    my $dom = $t->tx->res->dom;
+    cmp_deeply
+        [ $dom->find( 'nav a' )->map( 'all_text' )->each ],
+        bag( qw( Home Blog Projects ) ),
+        'nav element text is correct';
+
+=cut
+
+sub all_text_deeply {
+    my ( $t, $sel, $expect, $desc ) = @_;
+    $desc ||= qq{deeply match all text for "$sel"};
+    my @given = $t->tx->res->dom->find( $sel )->map( 'all_text' )->each;
+    local $Test::Builder::Level = $Test::Builder::Level + 1;
+    my $result = cmp_deeply( \@given, $expect, $desc )
+        or diag "Got text: \n", explain \@given;
+    return $t->success( $result );
+}
+
 
 =head2 attr_deeply
 
