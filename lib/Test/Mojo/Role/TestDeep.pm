@@ -41,6 +41,7 @@ C<Test::Deep>.
 use strict;
 use warnings;
 use Role::Tiny;
+use Test::More;
 use Test::Deep qw( cmp_deeply );
 
 =method json_deeply
@@ -79,7 +80,9 @@ sub json_deeply {
     my $given = $t->tx->res->json( $ptr );
 
     local $Test::Builder::Level = $Test::Builder::Level + 1;
-    return $t->success( cmp_deeply( $given, $expect, $desc ) );
+    my $result = cmp_deeply( $given, $expect, $desc )
+        or diag "Got JSON: ", explain $given;
+    return $t->success( $result );
 }
 
 =head2 text_deeply
@@ -128,7 +131,9 @@ sub text_deeply {
     $desc ||= qq{deeply match text for "$sel"};
     my @given = $t->tx->res->dom->find( $sel )->map( 'text' )->each;
     local $Test::Builder::Level = $Test::Builder::Level + 1;
-    return $t->success( cmp_deeply( \@given, $expect, $desc ) );
+    my $result = cmp_deeply( \@given, $expect, $desc )
+        or diag "Got text: \n", explain \@given;
+    return $t->success( $result );
 }
 
 
@@ -193,7 +198,9 @@ sub attr_deeply {
     }
 
     local $Test::Builder::Level = $Test::Builder::Level + 1;
-    return $t->success( cmp_deeply( \%given, \%expect, $desc ) );
+    my $result = cmp_deeply( \%given, \%expect, $desc )
+        or diag "Got attrs: \n", explain \%given;
+    return $t->success( $result );
 }
 
 1;
