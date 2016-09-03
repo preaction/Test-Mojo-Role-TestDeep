@@ -1,5 +1,7 @@
 Changelog for Test-Mojo-Role-TestDeep
 
+{{ $NEXT }}
+
 0.007 2016-03-15T06:27:50
  - add all_text_deeply method
  - add diagnostic information when tests fail
